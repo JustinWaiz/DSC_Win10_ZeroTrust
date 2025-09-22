@@ -8,7 +8,7 @@ einen sensitiven Datenordner mit restriktiven NTFS-Berechtigungen an, verhärtet
 aktiviert umfassende Überwachungsrichtlinien, schaltet optionale Features wie Credential Guard/WDAC ein, deaktiviert
 veraltete Protokolle (SMBv1, TLS 1.0/1.1) und erzwingt Sicherheits- sowie Defender-Richtlinien.
 
-## Enthaltene Sicherheitsmassnahmen (Auszug)
+## Enthaltene Sicherheitsmassnahmen
 
 - **Baseline & Datei­schutz**: Erstellt `C:\SensitiveData` und setzt ACLs ausschliesslich auf Administratoren und SYSTEM.
 - **PowerShell & Dienste**: Erzwingt die Execution Policy `RemoteSigned`, deinstalliert den Telnet-Client und deaktiviert
@@ -55,13 +55,12 @@ Install-Module -Name PSDscResources,NetworkingDsc,SecurityPolicyDsc,AuditPolicyD
 
 ## Server-seitige Vorbereitung (Management-Server)
 
-1. **Repository klonen** (oder Skript kopieren) auf dem Verwaltungsserver.
+1. **Repository klonen** (oder Skript kopieren) auf dem DCS Server.
 2. **Module installieren** (siehe oben) und sicherstellen, dass `PSGallery` als vertrauenswürdig markiert ist
    (`Set-PSRepository -Name PSGallery -InstallationPolicy Trusted`).
 3. **Konfigurationsfunktion laden**:
    ```powershell
-   Set-Location <Pfad-zum-Repo>
-   . .\Win10_ZeroTrust.ps1   # dot-sourcen, damit die Configuration-Funktion verfügbar ist
+   .\Win10_ZeroTrust.ps1
    ```
 4. **MOF-Dateien erzeugen** – Beispiel für zwei Clients:
    ```powershell
